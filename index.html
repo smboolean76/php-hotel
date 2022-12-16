@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Hotels</h1>
+      <ul>
+        <li v-for="(hotel, index) in hotels">
+          <h3>{{hotel.name}}</h3>
+          <button @click="getHotelInfo(index)">Maggiori info</button>
+        </li>
+      </ul>
+      <h2>Hotel Selezionato</h2>
+      <div>{{hotel}}</div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>

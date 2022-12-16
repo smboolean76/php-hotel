@@ -1,63 +1,28 @@
 <?php
-    $hotels = [
-        [
-            'name' => 'Hotel Belvedere',
-            'description' => 'Hotel Belvedere Descrizione',
-            'parking' => true,
-            'vote' => 4,
-            'distance_to_center' => 10.4
-        ],
-        [
-            'name' => 'Hotel Futuro',
-            'description' => 'Hotel Futuro Descrizione',
-            'parking' => true,
-            'vote' => 2,
-            'distance_to_center' => 2
-        ],
-        [
-            'name' => 'Hotel Rivamare',
-            'description' => 'Hotel Rivamare Descrizione',
-            'parking' => false,
-            'vote' => 1,
-            'distance_to_center' => 1
-        ],
-        [
-            'name' => 'Hotel Bellavista',
-            'description' => 'Hotel Bellavista Descrizione',
-            'parking' => false,
-            'vote' => 5,
-            'distance_to_center' => 5.5
-        ],
-        [
-            'name' => 'Hotel Milano',
-            'description' => 'Hotel Milano Descrizione',
-            'parking' => true,
-            'vote' => 2,
-            'distance_to_center' => 50
-        ],
-    ];
+// include_once "database.php";
+$hotels = file_get_contents('database.json');
+$hotels = json_decode($hotels, true);
+$filtered_hotels = $hotels;
 
-    $filtered_hotels = $hotels;
-
-    if( !empty($_GET['park']) || $_GET['park'] == "0" ) {
-        $temp_hotels = [];
-        foreach ( $filtered_hotels as $hotel ) {
-            if( $hotel['parking'] == $_GET['park'] ) {
-                $temp_hotels[] = $hotel;
-            }
+if( !empty($_GET['park']) || $_GET['park'] == "0" ) {
+    $temp_hotels = [];
+    foreach ( $filtered_hotels as $hotel ) {
+        if( $hotel['parking'] == $_GET['park'] ) {
+            $temp_hotels[] = $hotel;
         }
-        $filtered_hotels = $temp_hotels;
     }
+    $filtered_hotels = $temp_hotels;
+}
 
-    if( !empty($_GET['vote']) ) {
-        $temp_hotels = [];
-        foreach ( $filtered_hotels as $hotel ) {
-            if( $hotel['vote'] >= $_GET['vote'] ) {
-                $temp_hotels[] = $hotel;
-            }
+if( !empty($_GET['vote']) ) {
+    $temp_hotels = [];
+    foreach ( $filtered_hotels as $hotel ) {
+        if( $hotel['vote'] >= $_GET['vote'] ) {
+            $temp_hotels[] = $hotel;
         }
-        $filtered_hotels = $temp_hotels;
     }
+    $filtered_hotels = $temp_hotels;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
